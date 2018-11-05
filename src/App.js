@@ -3,7 +3,7 @@ import YouTube from "react-youtube";
 import useVideoQueue from "./hooks";
 
 function App() {
-  const videosQueue = useVideoQueue();
+  const videosQueue = useVideoQueue("r/treemusic");
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
   return (
     <div>
