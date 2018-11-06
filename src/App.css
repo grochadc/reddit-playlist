@@ -3,6 +3,10 @@ body {
   color: white;
 }
 
+a {
+  color: white;
+}
+
 .videoContainer {
   text-align: center;
 }
