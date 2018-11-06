@@ -18,7 +18,10 @@ function App() {
         containerClassName="videoContainer"
       />
       <div className="footer">
-        <h2>Now playing: {subreddit}</h2>
+        <h2>
+          Now playing:{" "}
+          <a href={`http://wwww.reddit.com/${subreddit}`}>{subreddit}</a>
+        </h2>
         <br />
         <label>Autoplay: </label>
         <input
