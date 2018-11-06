@@ -10,7 +10,7 @@ function App() {
   );
   const [autoplay, setAutoplay] = useState(true);
   return (
-    <div>
+    <div className="wrapper">
       <h1>Reddit Playlist</h1>
       <YouTube
         videoId={currentVideo}
