@@ -17,14 +17,16 @@ function App() {
         opts={{ playerVars: { autoplay } }}
         containerClassName="videoContainer"
       />
-      <h2>Now playing: {subreddit}</h2>
-      <br />
-      <label>Autoplay:</label>
-      <input
-        type="checkbox"
-        checked={autoplay}
-        onClick={() => toggleAutoplay()}
-      />
+      <div className="footer">
+        <h2>Now playing: {subreddit}</h2>
+        <br />
+        <label>Autoplay: </label>
+        <input
+          type="checkbox"
+          checked={autoplay}
+          onClick={() => toggleAutoplay()}
+        />
+      </div>
     </div>
   );
 }

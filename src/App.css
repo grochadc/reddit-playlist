@@ -10,3 +10,9 @@ body {
 .wrapper {
   text-align: center;
 }
+
+.footer {
+  margin: auto;
+  text-align: left;
+  width: 50%;
+}
