@@ -3,15 +3,16 @@ import YouTube from "react-youtube";
 import useVideoQueue from "./hooks";
 
 function App() {
-  const [currentVideo, nextVideo] = useVideoQueue("treemusic");
+  const subreddit = window.location.pathname.substr(1);
+  const [currentVideo, nextVideo] = useVideoQueue(
+    subreddit ? subreddit : "r/treemusic"
+  );
   return (
-    <div>
-      <YouTube
-        videoId={currentVideo}
-        onEnd={() => nextVideo()}
-        opts={{ playerVars: { autoplay: 1 } }}
-      />
-    </div>
+    <YouTube
+      videoId={currentVideo}
+      onEnd={() => nextVideo()}
+      opts={{ playerVars: { autoplay: 1 } }}
+    />
   );
 }
 
