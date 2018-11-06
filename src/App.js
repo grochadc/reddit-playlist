@@ -9,12 +9,15 @@ function App() {
     subreddit ? subreddit : "r/treemusic"
   );
   return (
-    <YouTube
-      videoId={currentVideo}
-      onEnd={() => nextVideo()}
-      opts={{ playerVars: { autoplay: 1 } }}
-      containerClassName="videoContainer"
-    />
+    <div>
+      <h1>Now playing: {subreddit}</h1>
+      <YouTube
+        videoId={currentVideo}
+        onEnd={() => nextVideo()}
+        opts={{ playerVars: { autoplay: 1 } }}
+        containerClassName="videoContainer"
+      />
+    </div>
   );
 }
 
