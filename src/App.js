@@ -1,21 +1,20 @@
-import React, { useState } from "react";
+import React from "react";
 import YouTube from "react-youtube";
-import useVideoQueue from "./hooks";
+import { useVideoQueue, useAutoplay } from "./hooks";
 import "./App.css";
 
 function App() {
-  const subreddit = window.location.pathname.substr(1);
-  const [currentVideo, nextVideo] = useVideoQueue(
-    subreddit ? subreddit : "r/treemusic"
-  );
-  const [autoplay, setAutoplay] = useState(true);
+  const path = window.location.pathname.substr(1);
+  const subreddit = path ? path : "r/treemusic";
+  const [currentVideo, nextVideo] = useVideoQueue(subreddit);
+  const [autoplay, toggleAutoplay] = useAutoplay(true);
   return (
     <div className="wrapper">
       <h1>Reddit Playlist</h1>
       <YouTube
         videoId={currentVideo}
         onEnd={() => nextVideo()}
-        opts={{ playerVars: { autoplay: autoplay ? 1 : 0 } }}
+        opts={{ playerVars: { autoplay } }}
         containerClassName="videoContainer"
       />
       <h2>Now playing: {subreddit}</h2>
@@ -24,7 +23,7 @@ function App() {
       <input
         type="checkbox"
         checked={autoplay}
-        onClick={() => setAutoplay(!autoplay)}
+        onClick={() => toggleAutoplay()}
       />
     </div>
   );
