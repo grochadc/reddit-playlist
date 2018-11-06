@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import getYoutubeId from "./lib/getYoutubeId";
+
 export default function useVideoQueue(subreddit) {
-  const redditUrl =
-    subreddit.indexOf("r/") > -1 ? subreddit.substr(2) : subreddit;
   const [queue, setQueue] = useState([]);
+  const [index, setIndex] = useState(0);
+  const increment = () => setIndex(index + 1);
   useEffect(async () => {
-    const { data } = await axios(`https://www.reddit.com/r/${redditUrl}.json`);
+    const { data } = await axios(`https://www.reddit.com/r/${subreddit}.json`);
     const links = data.data.children
       .filter(
         ({ data }) =>
@@ -20,5 +21,5 @@ export default function useVideoQueue(subreddit) {
       );
     setQueue(links);
   }, []);
-  return queue;
+  return [queue[index], increment];
 }

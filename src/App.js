@@ -1,15 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
 import YouTube from "react-youtube";
 import useVideoQueue from "./hooks";
 
 function App() {
-  const videosQueue = useVideoQueue("r/treemusic");
-  const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
+  const [currentVideo, nextVideo] = useVideoQueue("treemusic");
   return (
     <div>
       <YouTube
-        videoId={videosQueue[currentVideoIndex]}
-        onEnd={() => setCurrentVideoIndex(currentVideoIndex + 1)}
+        videoId={currentVideo}
+        onEnd={() => nextVideo()}
         opts={{ playerVars: { autoplay: 1 } }}
       />
     </div>
