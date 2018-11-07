@@ -20,7 +20,13 @@ function App() {
       <div className="footer">
         <h2>
           Now playing:{" "}
-          <a href={`http://wwww.reddit.com/${subreddit}`}>{subreddit}</a>
+          <a
+            href={`http://reddit.com/${subreddit}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {subreddit}
+          </a>
         </h2>
         <br />
         <label>Autoplay: </label>
