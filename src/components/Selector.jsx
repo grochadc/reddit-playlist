@@ -1,12 +1,5 @@
 import React, { useState } from "react";
-
-function getRedditPath(url) {
-  if (url.indexOf(".com") > -1) {
-    return url.substr(url.indexOf(".com") + 5);
-  } else {
-    return url;
-  }
-}
+import getRedditPath from "../lib/getRedditPath";
 
 export default function(props) {
   const [subreddit, setSubreddit] = useState("");
