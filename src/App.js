@@ -1,6 +1,7 @@
 import React from "react";
 import YouTube from "react-youtube";
 import { useVideoQueue, useAutoplay } from "./hooks";
+import Selector from "./components/Selector";
 import "./App.css";
 
 function App() {
@@ -29,12 +30,21 @@ function App() {
           </a>
         </h2>
         <br />
-        <label>Autoplay: </label>
-        <input
-          type="checkbox"
-          checked={autoplay}
-          onClick={() => toggleAutoplay()}
-        />
+        <div className="controls">
+          <Selector
+            handleSubredditChange={newSubreddit =>
+              (window.location.pathname = newSubreddit)
+            }
+          />
+          <span>
+            <label>Autoplay: </label>
+            <input
+              type="checkbox"
+              checked={autoplay}
+              onClick={() => toggleAutoplay()}
+            />
+          </span>
+        </div>
       </div>
     </div>
   );
