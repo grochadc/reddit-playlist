@@ -15,7 +15,13 @@ export const useAutoplay = initial => {
 export function useVideoQueue(subreddit) {
   const [queue, setQueue] = useState([]);
   const [index, setIndex] = useState(0);
-  const increment = () => setIndex(index + 1);
+  const increment = () => {
+    if (index > queue.length) {
+      setIndex(0);
+    } else {
+      setIndex(index + 1);
+    }
+  };
   useEffect(() => {
     axios(`https://www.reddit.com/${subreddit}.json`)
       .then(({ data }) => data)
