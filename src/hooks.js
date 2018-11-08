@@ -23,7 +23,7 @@ export function useVideoQueue(subreddit) {
     }
   };
   useEffect(() => {
-    axios(`https://www.reddit.com/${subreddit}.json`)
+    axios(`https://www.reddit.com/${subreddit.path}.json${subreddit.search}`)
       .then(({ data }) => data)
       .catch(() => treemusic)
       .then(({ data }) => {

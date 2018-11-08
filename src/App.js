@@ -6,7 +6,7 @@ import "./App.css";
 
 function App() {
   const path = window.location.pathname.substr(1);
-  const subreddit = path ? path : "r/treemusic";
+  const subreddit = path ? {path, search: window.location.search } : {path: "r/treemusic", search:""};
   const [currentVideo, nextVideo] = useVideoQueue(subreddit);
   const [autoplay, toggleAutoplay] = useAutoplay(true);
   return (
@@ -26,14 +26,16 @@ function App() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            {subreddit}
+            {subreddit.path + subreddit.search}
           </a>
         </h2>
         <br />
         <div className="controls">
           <Selector
-            handleSubredditChange={newSubreddit =>
-              (window.location.pathname = newSubreddit)
+            handleSubredditChange={
+              (newSubreddit) => {
+                window.location.href = decodeURIComponent(newSubreddit)
+              }
             }
           />
           <span>
