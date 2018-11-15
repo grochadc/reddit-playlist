@@ -6,6 +6,7 @@ import "./App.css";
 
 function App() {
   const path = window.location.pathname.substr(1);
+  //Search is for reddit parameters like top/?t=all
   const subreddit = path ? {path, search: window.location.search } : {path: "r/treemusic", search:""};
   const [currentVideo, nextVideo] = useVideoQueue(subreddit);
   const [autoplay, toggleAutoplay] = useAutoplay(true);
