@@ -34,6 +34,9 @@ function App() {
             {subreddit.path + subreddit.search}
           </a>
         </h2>
+        <div className="skipButtonContainer">
+        <button onClick={nextVideo}>Skip Video</button>
+        </div>
         <br />
         <div className="controls">
           <Selector
