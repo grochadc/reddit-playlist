@@ -15,6 +15,7 @@ function App() {
       <h1>Reddit Playlist</h1>
       <YouTube
         videoId={currentVideo}
+        onPlay={({target}) => document.title = (target.getVideoData().title)}
         onEnd={() => nextVideo()}
         onError={(err) => {
           console.log('error on video', err.data)
