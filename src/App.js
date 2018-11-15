@@ -15,6 +15,10 @@ function App() {
       <YouTube
         videoId={currentVideo}
         onEnd={() => nextVideo()}
+        onError={(err) => {
+          console.log('error on video', err.data)
+          nextVideo()
+        }}
         opts={{ playerVars: { autoplay } }}
         containerClassName="videoContainer"
       />
