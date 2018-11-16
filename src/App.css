@@ -25,5 +25,26 @@ a {
 
 .controls {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  padding: 5px;
+}
+
+.controls span {
+  margin: 5px;
+}
+
+.videoWrapper {
+  width: 640px;
+  margin: auto;
+}
+
+button.link {
+  background: none !important;
+  color: inherit;
+  border: none;
+  padding: 0 !important;
+  font: inherit;
+  /*border is optional*/
+  border-bottom: 1px solid #444;
+  cursor: pointer;
 }

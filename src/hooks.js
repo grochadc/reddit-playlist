@@ -3,7 +3,7 @@ import axios from "axios";
 import getYoutubeId from "./lib/getYoutubeId";
 const treemusic = require("./treemusic.json");
 
-export const useAutoplay = initial => {
+export const useToggle = initial => {
   const [togglesState, toggle] = useState(initial);
   function triggerToggle() {
     toggle(!togglesState);
