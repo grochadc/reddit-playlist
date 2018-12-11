@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import YouTube from "react-youtube";
 import { useVideoQueue, useToggle } from "./hooks";
 import Selector from "./components/Selector";
+import History from "./components/History";
 import "./App.css";
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
   const [currentVideo, nextVideo] = useVideoQueue(subreddit);
   const [autoplay, toggleAutoplay] = useToggle(true);
   const [showSelector, toggleSelector] = useToggle(false);
+  const [history, setHistory] = useState([]);
   return (
     <div className="wrapper">
       <h1>Reddit Playlist</h1>
@@ -20,11 +22,15 @@ function App() {
         <YouTube
           videoId={currentVideo}
           onPlay={({ target }) => {
-            document.title = target.getVideoData().title;
             let duration = target.getDuration();
             if (duration > 600) {
               console.log("Skipping video beacuse is longer than 10 mins");
               nextVideo();
+            } else {
+              let { title, video_id } = target.getVideoData();
+              document.title = title;
+              setHistory([...history, { title, video_id }]);
+              console.log("History", history);
             }
           }}
           onEnd={() => nextVideo()}
@@ -70,6 +76,7 @@ function App() {
             }}
           />
         ) : null}
+        <History entries={history} />
       </div>
     </div>
   );
