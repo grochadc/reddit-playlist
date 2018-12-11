@@ -53,9 +53,21 @@ function App() {
               onClick={() => toggleAutoplay()}
             />
           </span>
+          <span>
+            <button className="link" onClick={toggleSelector}>
+              Want another subreddit?
+            </button>
+          </span>
         </div>
       </div>
       <div className="footer">
+        {showSelector ? (
+          <Selector
+            handleSubredditChange={newSubreddit => {
+              window.location.href = decodeURIComponent(newSubreddit);
+            }}
+          />
+        ) : null}
         <h2>
           Now playing:{" "}
           <a
@@ -66,16 +78,6 @@ function App() {
             {subreddit.path + subreddit.search}
           </a>
         </h2>
-        <button className="link" onClick={toggleSelector}>
-          Want another subreddit?
-        </button>
-        {showSelector ? (
-          <Selector
-            handleSubredditChange={newSubreddit => {
-              window.location.href = decodeURIComponent(newSubreddit);
-            }}
-          />
-        ) : null}
         <History entries={history} />
       </div>
     </div>
