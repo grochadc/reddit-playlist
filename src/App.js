@@ -1,8 +1,11 @@
 import React, { useState } from "react";
-import YouTube from "react-youtube";
 import { useVideoQueue, useToggle } from "./hooks";
+import Video from "./components/Video";
+import Controls from "./components/Controls";
 import Selector from "./components/Selector";
 import History from "./components/History";
+import NowPlaying from "./components/NowPlaying";
+import { MyContext } from "./context";
 import "./App.css";
 
 function App() {
@@ -16,71 +19,35 @@ function App() {
   const [showSelector, toggleSelector] = useToggle(false);
   const [history, setHistory] = useState([]);
   return (
-    <div className="wrapper">
-      <h1>Reddit Playlist</h1>
-      <div className="videoWrapper">
-        <YouTube
-          videoId={currentVideo}
-          onPlay={({ target }) => {
-            let duration = target.getDuration();
-            if (duration > 600) {
-              console.log("Skipping video beacuse is longer than 10 mins");
-              nextVideo();
-            } else {
-              let { title, video_id } = target.getVideoData();
-              document.title = title;
-              setHistory([...history, { title, video_id }]);
-              console.log("History", history);
-            }
-          }}
-          onEnd={() => nextVideo()}
-          onError={err => {
-            console.log("error on video", err.data);
-            nextVideo();
-          }}
-          opts={{ playerVars: { autoplay } }}
-          containerClassName="videoContainer"
-        />
-        <div className="controls">
-          <span className="skipButtonContainer">
-            <button onClick={nextVideo}>Skip</button>
-          </span>
-          <span>
-            <label>Autoplay: </label>
-            <input
-              type="checkbox"
-              checked={autoplay}
-              onClick={() => toggleAutoplay()}
-            />
-          </span>
-          <span>
-            <button className="link" onClick={toggleSelector}>
-              Want another subreddit?
-            </button>
-          </span>
+    <MyContext.Provider
+      value={{
+        currentVideo,
+        nextVideo,
+        autoplay,
+        setHistory,
+        history,
+        toggleAutoplay,
+        toggleSelector
+      }}
+    >
+      <div className="wrapper">
+        <h1>Reddit Playlist</h1>
+        <div className="videoWrapper">
+          <Video />
+          <Controls />
         </div>
-      </div>
-      <div className="footer">
-        {showSelector ? (
+        <div className="footer">
           <Selector
+            show={showSelector}
             handleSubredditChange={newSubreddit => {
               window.location.href = decodeURIComponent(newSubreddit);
             }}
           />
-        ) : null}
-        <h2>
-          Now playing:{" "}
-          <a
-            href={`http://reddit.com/${subreddit}`}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {subreddit.path + subreddit.search}
-          </a>
-        </h2>
-        <History entries={history} />
+          <NowPlaying subreddit={subreddit} />
+          <History entries={history} />
+        </div>
       </div>
-    </div>
+    </MyContext.Provider>
   );
 }
 

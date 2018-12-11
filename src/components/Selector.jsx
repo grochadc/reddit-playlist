@@ -3,7 +3,8 @@ import getRedditPath from "../lib/getRedditPath";
 
 export default function(props) {
   const [subreddit, setSubreddit] = useState("");
-  return (
+  let { show } = props;
+  return show ? (
     <div className="selector">
       <input
         type="text"
@@ -16,5 +17,5 @@ export default function(props) {
         Get Playlist
       </button>
     </div>
-  );
+  ) : null;
 }
