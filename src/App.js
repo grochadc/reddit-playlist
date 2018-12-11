@@ -19,9 +19,14 @@ function App() {
       <div className="videoWrapper">
         <YouTube
           videoId={currentVideo}
-          onPlay={({ target }) =>
-            (document.title = target.getVideoData().title)
-          }
+          onPlay={({ target }) => {
+            document.title = target.getVideoData().title;
+            let duration = target.getDuration();
+            if (duration > 600) {
+              console.log("Skipping video beacuse is longer than 10 mins");
+              nextVideo();
+            }
+          }}
           onEnd={() => nextVideo()}
           onError={err => {
             console.log("error on video", err.data);
