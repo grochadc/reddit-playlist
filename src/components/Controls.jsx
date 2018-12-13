@@ -1,5 +1,16 @@
 import React, { useContext } from "react";
 import { MyContext } from "../context";
+import styled from "styled-components";
+
+const Link = styled.button`
+  background: none !important;
+  color: inherit;
+  border: none;
+  padding: 0 !important;
+  font: inherit;
+  border-bottom: 1px solid #444;
+  cursor: pointer;
+`;
 
 export default function() {
   const context = useContext(MyContext);
@@ -17,9 +28,7 @@ export default function() {
         />
       </span>
       <span>
-        <button className="link" onClick={context.toggleSelector}>
-          Want another subreddit?
-        </button>
+        <Link onClick={context.toggleSelector}>Want another subreddit?</Link>
       </span>
     </div>
   );
