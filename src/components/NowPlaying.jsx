@@ -1,11 +1,12 @@
 import React from "react";
+import PropTypes from "prop-types";
 
-export default function(props) {
+const NowPlaying = function(props) {
   return (
     <h2>
       Now playing:{" "}
       <a
-        href={`http://reddit.com/${props.subreddit}`}
+        href={`http://reddit.com/${props.subreddit.path}`}
         target="_blank"
         rel="noopener noreferrer"
       >
@@ -13,4 +14,9 @@ export default function(props) {
       </a>
     </h2>
   );
-}
+};
+NowPlaying.propTypes = {
+  subreddit: PropTypes.object.isRequired
+};
+
+export default NowPlaying;
