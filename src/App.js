@@ -18,6 +18,7 @@ function App() {
   const [autoplay, toggleAutoplay] = useToggle(true);
   const [showSelector, toggleSelector] = useToggle(false);
   const [history, setHistory] = useState([]);
+  const currentTitle = history.length ? history[history.length - 1].title : "";
   return (
     <MyContext.Provider
       value={{
@@ -33,6 +34,7 @@ function App() {
       <div className="wrapper">
         <h1>Reddit Playlist</h1>
         <div className="videoWrapper">
+          <h3>{currentTitle}</h3>
           <Video />
           <Controls />
         </div>
